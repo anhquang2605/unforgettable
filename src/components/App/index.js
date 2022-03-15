@@ -7,6 +7,9 @@ import SignUp from '../Authentication/SignUp';
 import NavBar from './../NavBar';
 import firebase from './../Firebase/firebase';
 import Home from './../Home';
+//import jean's calendar
+import Calendar from './../Calendar';
+
 function App() {
     const [user, setUser] = useState(null);
     const [services, setServices] = useState([]);
