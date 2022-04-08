@@ -1,0 +1,11 @@
+#note-list{
+    width: 100%;
+}
+.list-note-item{
+    width: 100%;
+}
+.click-container{
+    width: 80%;
+    cursor: pointer;
+    padding: 20px;
+}
