@@ -3,6 +3,11 @@
 }
 .list-note-item{
     width: 100%;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+.list-note-item:hover{
+    background-color: khaki;
 }
 .click-container{
     width: 80%;

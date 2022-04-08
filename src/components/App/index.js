@@ -41,7 +41,7 @@ function App() {
             <Route path={ROUTES.SIGNUP} element={<SignUp/>}></Route>
             <Route exact path={ROUTES.HOME} element={<Home name={"sdf"} user={user} services={services} />}></Route>
             <Route path={ROUTES.NOTE} element={<Note user={user}></Note>}></Route>
-            <Route path={ROUTES.NOTEVIEW+"/create"} element={<NoteView operation="create" user={user}></NoteView>}></Route>
+            <Route exact path={ROUTES.NOTEVIEW+"/create"} element={<NoteView operation="create" user={user}></NoteView>}></Route>
             <Route path={ROUTES.NOTEVIEW+"/:id"} element={<NoteView operation="edit" user={user}></NoteView>}></Route>
             {/* <Route path={ROUTES.CALENDAR} element={<Calendar user={user}></Calendar>}></Route> */}
       </Routes>

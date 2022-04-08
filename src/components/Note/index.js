@@ -31,21 +31,8 @@ const Note = (props) => {
         let theNotes = user.notes;
         setNotes(theNotes);
     }
-
-    let deleteNoteFromUser = (noteID) =>{
-
-    }
-
-    let updateNoteFromUser = (noteID) =>{
-        //set date modified as well, allow update title and body 
-    }
-
     let setLockForNote = (notePass, noteID)=> {
-
-    }
-
-    let unlockNote = (notePass, noteID) =>{
-
+        
     }
 
     let shareNoteToAnotherUser = (noteID, userID) => {
@@ -60,10 +47,6 @@ const Note = (props) => {
 
     }
 
-
-    let createNote = () => {
-
-    }
     useEffect(() => {
         if(props.user != ""){
             getUserFromDB(props.user);
