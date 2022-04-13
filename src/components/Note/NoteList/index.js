@@ -35,7 +35,7 @@ const NoteList = (props) => {
             )
             :
             <div>
-                No note created yet
+                No result :(
             </div>
             }
         </div>

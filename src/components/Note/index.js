@@ -4,9 +4,12 @@ import React, {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import NoteList from './NoteList';
 import "./note.css";
+import NoteFilter from './NoteFilter';
+import NoteSorter from './NoteSorter';
 const Note = (props) => {
     const [user, setUser] = useState(null);
     const [notes, setNotes] = useState([]);
+    const [filteredNotes, setFilterdNotes] = useState([]);
     const [error, setError] = useState([]);
     let history = useNavigate();
     const [newNote, setNewNote] = useState({
@@ -30,6 +33,10 @@ const Note = (props) => {
     let setNotesFromUser = () => {
         let theNotes = user.notes;
         setNotes(theNotes);
+        setFilterdNotes(theNotes);
+    }
+    let setFNotesForNote =  (notes) => {//For children to update notes state.
+        setFilterdNotes(notes);
     }
     let setLockForNote = (notePass, noteID)=> {
         
@@ -57,11 +64,19 @@ const Note = (props) => {
             setNotesFromUser()
         }
     }, [user]);
+
     return (
         <div id="my-note">
             {props.user}'s Notes 
             {notes.length != 0?
-            <NoteList notes = {notes}></NoteList>
+            <React.Fragment>
+                <div id="organize-utility">
+                    <NoteFilter notes={notes} setFNotesForNote={setFNotesForNote}></NoteFilter>
+                    <NoteSorter notes={filteredNotes} setFNotesForNote={setFNotesForNote}></NoteSorter>
+                </div>     
+                <NoteList notes = {filteredNotes}></NoteList>
+            </React.Fragment>
+
             : <div className="empty-note">
                 There is no note currently
             </div>
