@@ -40,6 +40,7 @@ function App() {
             <Route path={ROUTES.LOGIN} element={<LogIn setUserForApp={setUser}/>}></Route>
             <Route path={ROUTES.SIGNUP} element={<SignUp/>}></Route>
             <Route exact path={ROUTES.HOME} element={<Home user={user} services={services}/>}></Route>
+            <Route exact path={ROUTES.CALENDAR} element={<Calendar user={user} services={services}/>}></Route>
       </Routes>
     </div>
   );
