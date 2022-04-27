@@ -3,7 +3,7 @@ import './navbar.css';
 const NavBar = (props) => {
     return (
         <div id="nav-bar">
-            {props.chilldren}
+            {props.children}
         </div>
     );
 }

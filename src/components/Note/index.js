@@ -38,21 +38,6 @@ const Note = (props) => {
     let setFNotesForNote =  (notes) => {//For children to update notes state.
         setFilterdNotes(notes);
     }
-    let setLockForNote = (notePass, noteID)=> {
-        
-    }
-
-    let shareNoteToAnotherUser = (noteID, userID) => {
-
-    }
-
-    let filterNotesBy = (notes, criteria) => {
-
-    }
-
-    let sortNotesBy = (notes, criteria, asc_desc) => {
-
-    }
 
     useEffect(() => {
         if(props.user != ""){
@@ -74,7 +59,7 @@ const Note = (props) => {
                     <NoteFilter notes={notes} setFNotesForNote={setFNotesForNote}></NoteFilter>
                     <NoteSorter notes={filteredNotes} setFNotesForNote={setFNotesForNote}></NoteSorter>
                 </div>     
-                <NoteList notes = {filteredNotes}></NoteList>
+                <NoteList user={props.user} notes = {filteredNotes}></NoteList>
             </React.Fragment>
 
             : <div className="empty-note">
