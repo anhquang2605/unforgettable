@@ -30,7 +30,7 @@ const LogIn = (props) => {
         }
     }
     let findUser = (username) =>{
-        var docRef = db.collection("accounts").doc(username);
+        var docRef = db.collection("accounts").doc(username);//username is a string
         docRef.get().then((doc)=>{
             if(doc.exists){
                 setUser(doc.data());

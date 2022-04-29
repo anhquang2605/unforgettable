@@ -9,7 +9,7 @@ const Home = (props) => {
     return (
         <div id="home">
             <header className="App-header">
-                Hello {props.user}, welcome to unforgettable
+                Hello {props.user},welcome to unforgettable
             </header>
             <div id="home-body">
                 {props.services.map((item,index) => {
