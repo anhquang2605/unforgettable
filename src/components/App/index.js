@@ -8,6 +8,8 @@ import SignUp from '../Authentication/SignUp';
 import NavBar from './../NavBar';
 import firebase from './../Firebase/firebase';
 import Home from './../Home';
+//import jean's calendar
+import Calendar from './../Calendar';
 import Note from './../Note';
 import NoteView from './../Note/NoteView';
 import Splash from './../Splash';
@@ -64,6 +66,8 @@ function App() {
       <Routes>
             <Route path={ROUTES.LOGIN} element={<LogIn setUserForApp={setUser}/>}></Route>
             <Route path={ROUTES.SIGNUP} element={<SignUp/>}></Route>
+            <Route exact path={ROUTES.HOME} element={<Home user={user} services={services}/>}></Route>
+            <Route exact path={ROUTES.CALENDAR} element={<Calendar user={user} services={services}/>}></Route>
             <Route exact path={ROUTES.HOME} element={<Home name={"sdf"} user={user} services={services} />}></Route>
             <Route path={ROUTES.NOTE} element={<Note user={user}></Note>}></Route>
             <Route exact path={ROUTES.NOTEVIEW+"/create"} element={<NoteView operation="create" user={user}></NoteView>}></Route>
