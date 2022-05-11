@@ -13,6 +13,7 @@ import Calendar from './../Calendar';
 import Note from './../Note';
 import NoteView from './../Note/NoteView';
 import Splash from './../Splash';
+import Checklists from '../Checklists';
 function App() {
     const [user, setUser] = useState(null);
     const [services, setServices] = useState([]);
@@ -63,6 +64,7 @@ function App() {
             </React.Fragment>
          }
       </NavBar>
+      
       <Routes>
             <Route path={ROUTES.LOGIN} element={<LogIn setUserForApp={setUser}/>}></Route>
             <Route path={ROUTES.SIGNUP} element={<SignUp/>}></Route>
@@ -73,6 +75,7 @@ function App() {
             <Route exact path={ROUTES.NOTEVIEW+"/create"} element={<NoteView operation="create" user={user}></NoteView>}></Route>
             <Route path={ROUTES.NOTEVIEW+"/:id"} element={<NoteView operation="edit" user={user}></NoteView>}></Route>
             <Route path={ROUTES.SPLASH} element={<Splash></Splash>}></Route>
+            <Route path={ROUTES.CHECKLIST} element={<Checklists />}></Route>
             {/* <Route path={ROUTES.CALENDAR} element={<Calendar user={user}></Calendar>}></Route> */}
       </Routes>
     </div>
