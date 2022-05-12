@@ -1,13 +1,64 @@
-.active-link{
+.unforgettable-app a {
+    padding-top: 0.8rem;
+  }
+  
+  .active-link {
     font-weight: bold;
-}
-#nav-bar{
-    font-family: 'Single Day', cursive;
+    position: relative;
+  }
+  
+  .active-link:before {
+    content: "";
+    position: absolute;
+    left: 0%;
+    bottom: -1.1rem;
+    height: 10%;
+    width: 100%;
+    background: #000;
+  }
+  
+  #nav-bar {
+    font-family: "Single Day", cursive;
     text-transform: uppercase;
     font-size: 1.5em;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-}
-#company-logo{
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background: #f2e9e4;
+    height: 87px;
+    padding: 0rem 2rem;
+  }
+  #company-logo {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    gap: 0.4rem;
     margin-right: auto;
-
-}
+  }
+  
+  #company-logo img {
+    max-width: 40px;
+    width: 100%;
+  }
+  
+  a {
+    text-decoration: none;
+    color: #000;
+  }
+  
+  .navigation_part {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    gap: 1rem;
+  }
+  

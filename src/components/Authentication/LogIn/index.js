@@ -48,28 +48,69 @@ const LogIn = (props) => {
     }, []);
     return (
         <div id="log-in">
-            <h4>Welcome to Unfrogettalbe</h4>
-            <p>Please sign in or create a an account to boost your productivity</p>
-            <div id="authen-form">
-                <span className="form-field">
-                    <label>Username:</label>
-                    <input type="text" value={usernameField} onChange={handleUsernameField} onKeyUp={handleCheckUser} autoComplete='false'></input>
-                </span>
-                <span className="error username-not-existed" hidden={userFound}>Username does not exist, please try again or sign up</span>
-                <br></br>
-                <span className="form-field" hidden={!userFound}>
-                    <label>Password:</label>
-                    <input type="password" value={passwordField} onChange={handlePasswordCheck} autoComplete='false'></input>
-                </span>
-                <span className="error username-not-existed" hidden={passwordMatch}>Wrong password, please try again</span>
-                <br></br>
-                <button className="form-button" onClick={handleSignIn} disabled={!userFound}>Log In</button>
-                <button className="form-button" onClick={()=>{
-                    history('/sign-up')
-                }}>Sign Up</button>
+            <div>
+                <h4 className="fw-bold">LOG IN</h4>
+                {/* <p>Please sign in or create a an account to boost your productivity</p> */}
+                <div id="authen-form">
+                    <span className="form-field">
+                        {/* <label>Username:</label>
+                <br /> */}
+                        <input
+                            type="text"
+                            value={usernameField}
+                            onChange={handleUsernameField}
+                            onKeyUp={handleCheckUser}
+                            autoComplete="false"
+                            placeholder="Username"
+                        ></input>
+                    </span>
+                    <br />
+                    <span className="error username-not-existed" hidden={userFound}>
+                        Username does not exist, please try again or sign up
+                    </span>
+                    <br></br>
+                    <span className="form-field" hidden={!userFound}>
+                        {/* <label>Password:</label>
+                <br /> */}
+                        <input
+                            type="password"
+                            value={passwordField}
+                            onChange={handlePasswordCheck}
+                            autoComplete="false"
+                            placeholder="Password"
+                        ></input>
+                    </span>
+                    <br />
+                    <span className="error username-not-existed" hidden={passwordMatch}>
+                        Wrong password, please try again
+                    </span>
+                    <br />
+                    <span hidden={!userFound} className="forget_pss">
+                        forgot password ?
+                    </span>
+                    <br />
+                    <br></br>
+                    <div className="d-flex flex-column align-items-center">
+                        <button
+                            className="form-button1"
+                            onClick={handleSignIn}
+                            disabled={!userFound}
+                        >
+                            Log In
+                        </button>
+                        <button
+                            className="form-button2"
+                            onClick={() => {
+                                history("/sign-up");
+                            }}
+                        >
+                            Sign Up
+                        </button>
+                    </div>
+                </div>
             </div>
         </div>
     );
-}
+};
 
 export default LogIn;
