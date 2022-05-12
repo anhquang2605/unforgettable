@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
+import ChecklistCard from "./ChecklistCard";
 
 const Checklists = () => {
   const [modal, setModal] = useState(false);
@@ -18,15 +19,24 @@ const Checklists = () => {
       <div className="header">
         <h1>Let's get productive.</h1>
         <Button onClick={() => setModal(true)}>Create Checklist</Button>
+        <CreateChecklist
+          toggle={toggle}
+          modal={modal}
+          save={saveChecklist}
+          setChecklistArray={setChecklistArray}
+          checklistArray={checklistArray}
+        />
       </div>
       <div className="checklist-view"></div>
-      <CreateChecklist
-        toggle={toggle}
-        modal={modal}
-        save={saveChecklist}
-        setChecklistArray={setChecklistArray}
-        checklistArray={checklistArray}
-      />
+
+      {checklistArray.map((key, obj) => (
+        <li key={key}>
+          <h3>{obj.checklistName}</h3>
+          {obj.tasks.map((task) => (
+            <li>{task.name}</li>
+          ))}
+        </li>
+      ))}
     </div>
   );
 };
@@ -122,7 +132,7 @@ function Checklist({ setChecklistArray, checklistArray }) {
         (checkList) =>
           checkList.checklistName.toLowerCase() === checklistName.toLowerCase()
       ) || {};
-    debugger;
+
     if (Object.keys(foundCheckList).length === 0) {
       setChecklistArray([
         ...checklistArray,
