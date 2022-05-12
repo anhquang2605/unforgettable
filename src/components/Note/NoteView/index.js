@@ -290,7 +290,7 @@ const NoteView = (props) => {
                             <React.Fragment>
                                 <button onClick={handleRemoveLock}>Remove Lock</button>
                             </React.Fragment>
-                        ) : (
+                        ) : (props.operation == "edit" && 
                             <button onClick={handleAddLock}>Add Lock</button>
                         )}
                     </div>
