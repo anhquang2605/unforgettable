@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {Button, Modal, ModalHeader, ModalBody, ModalFooter} from 'reactstrap';
  
 const Checklists = () => {
@@ -28,10 +28,13 @@ const Checklists = () => {
 }
  
 const CreateChecklist = ({toggle, modal, save}) =>{
+    
+
     const handleSave = () => {
-        let checklist = new Checklist; 
+        let checklist = new Checklist();
         save(checklist);
     }
+
     return (
         <Modal isOpen={modal} toggle={toggle}>
             <ModalHeader toggle={toggle}>Create Checklist</ModalHeader>
@@ -57,6 +60,9 @@ function Task({ task, index, completeTask, removeTask }) {
  
 function AddTask({ addTask }) {
     const [value, setValue] = useState("");
+
+    useEffect(() => setValue(value), [value]); 
+
     const handleSubmit = e => {
         e.preventDefault();
         if (!value) return;
@@ -81,6 +87,8 @@ function Checklist(){
     const [checklistName, setChecklistName] = useState('');
     const [tasks, setTasks] = useState ([]);
  
+    useEffect(() => setChecklistName(checklistName), [checklistName]); 
+
     const addTask = name => {
         const newTasks = [...tasks, {name, completed: false}];
         setTasks(newTasks);
