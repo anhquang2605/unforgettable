@@ -2,6 +2,11 @@ import React, {useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import firebase from '../../Firebase/firebase';
 import './notelist.css';
+import fwd from "../../../images/fwd.svg";
+import lock from "../../../images/lock.svg";
+import bin from "../../../images/bin.png";
+import write from "../../../images/write.svg";
+
 const NoteList = (props) => {
     const [shareToUserList, setShareToUser] = useState({});
     const [reciverExistList, setReceiverExistList] = useState({});
@@ -24,7 +29,7 @@ const NoteList = (props) => {
     }
     let turnOnOverlay = (overlayid) => {
         let theoverlay = document.getElementById(overlayid);
-        theoverlay.classList.add("revealing-sm-overlay"); 
+        theoverlay.classList.add("revealing-sm-overlay");
     }
     let handleShareUser = (e,id) => {
         let list = {...shareToUserList};
@@ -38,7 +43,7 @@ const NoteList = (props) => {
             setShareToUser(list);
         }
         let theoverlay = document.getElementById(type+"-note-"+id);
-        theoverlay.classList.remove("revealing-sm-overlay"); 
+        theoverlay.classList.remove("revealing-sm-overlay");
     }
     let shareNote = (id) => {
         let notes = [...props.notes];
@@ -47,7 +52,7 @@ const NoteList = (props) => {
         user.get().then((doc)=>{
             if(doc.exists){
                 db.collection("accounts").doc(shareToUserList[id]).update({
-                    notes: firebase.firestore.FieldValue.arrayUnion(notes[id]) 
+                    notes: firebase.firestore.FieldValue.arrayUnion(notes[id])
                 }).then(()=>{
                     console.log("shared");
                     receiverErrorCodes[id] = false;
@@ -73,49 +78,104 @@ const NoteList = (props) => {
     }
     return (
         <div id="note-list">
-            {props.notes.length?
-            props.notes.map((note)=>
-                {
-                    if (note.active){
-                        return (
-                            <div className="list-note-item" key={note.id} id={"note-" + note.id}>
-                                <div className="click-container" onClick={(e)=>{handleNoteViewing(e,note.id)}}>
-                                    <div className="note-props note-title">{note.title}</div>
-                                    <div className="note-props note-modified-date">{note.dateModified}</div>
-                                    {<div className="note-props note-body">{!note.locked ?(note.body.length > allowLengthForTextToBeDisplay ? transformExeceedText(note.body) : note.body) : "Locked" }</div>}
-                                </div>
-                                <div className="extra-function-btn">
-                                    <button onClick={(e)=>{triggerNoteSharing(e,note.id)}}>Share</button>
-                                    <button onClick={(e)=>{triggerNoteDeleting(e,note.id)}}>Delete</button>
-                                </div>
-                                <div className="overlay-small" id={"share-note-" + note.id}>
-                                    {reciverExistList[note.id] && <p className="error-user-no-exist">User does not exist, please try again</p>}
-                                    <span className="form-element">
-                                        <label>Share to:</label>
-                                        <input type="text" onChange={ (e) => {handleShareUser(e,note.id)}} value={shareToUserList[note.id]} placeholder="Enter recipient's username"></input>
-                                    </span>
-                                    <button onClick={()=>{shareNote(note.id)}}>Confirm Sharing</button>
-                                    <button onClick={ () => {closeSmOverlay(note.id,"share")}}>Cancel</button>
-                                </div>
-                                <div className="overlay-small" id={"delete-note-" + note.id}>
-                                    <p>Delete this note?</p>
-                                    <div className="button-group">
-                                        <button onClick={()=>{deleteNote(note.id)}}>Confirm</button>
-                                        <button onClick={ () => {closeSmOverlay(note.id,"delete")}} >Cancel</button>
+            <div className="container-fluid px-0">
+                <div className="row gx-5">
+                    {props.notes.length ? (
+                        props.notes.map((note) => {
+                            if (note.active) {
+                                return (
+                                    <div
+                                        // className="list-note-item col-4"
+                                        className="col-4" key={note.id} id={"note-" + note.id} >
+                                        <div className="edit_column">
+                                            <div className="d-flex align-items-center justify-content-between w-100 border-bottom border-4 border-dark pb-2">
+                                                <div className="d-flex align-items-center gap-2">
+                                                    <h5 className="mb-0 fw-bold">{note.title}</h5>
+                                                    {/* <img style={{ width: "30px" }} src={lock} alt="" /> */}
+                                                </div>
+                                                <div>
+                                                    <img
+                                                        onClick={(e) => { triggerNoteSharing(e, note.id); }} style={{ width: "30px" }} src={fwd} alt="" className="pointer" />
+
+                                                    <div
+                                                        className="overlay-small d-flex gap-3 align-items-center justify-content-center position-fixed"
+                                                        id={"share-note-" + note.id}
+                                                    >
+                                                        {reciverExistList[note.id] && (
+                                                            <p className="error-user-no-exist">
+                                                                User does not exist, please try again
+                                                            </p>
+                                                        )}
+                                                        <span className="form-element d-flex gap-3">
+                                                            <label className="fw-bold font">Share to:</label>
+                                                            <input
+                                                                type="text"
+                                                                onChange={(e) => {
+                                                                    handleShareUser(e, note.id);
+                                                                }}
+                                                                value={shareToUserList[note.id]}
+                                                                placeholder="Enter recipient's username"
+                                                                className="form-control font"
+                                                            ></input>
+                                                        </span>
+                                                        <button
+                                                            onClick={() => {
+                                                                shareNote(note.id);
+                                                            }}
+                                                            className="btn btn-dark font"
+                                                        >
+                                                            Confirm Sharing
+                                                        </button>
+                                                        <button
+                                                            className="btn btn-danger"
+                                                            onClick={() => {
+                                                                closeSmOverlay(note.id, "share");
+                                                            }}
+                                                        >
+                                                            Cancel
+                                                        </button>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <p className="h3 font">
+                                                {!note.locked
+                                                    ? note.body.length > allowLengthForTextToBeDisplay
+                                                        ? transformExeceedText(note.body)
+                                                        : note.body
+                                                    : "Locked"}
+                                            </p>
+
+                                            <div className="d-flex justify-content-between w-100">
+                                                <img
+                                                    onClick={() => {
+                                                        deleteNote(note.id);
+                                                    }}
+                                                    style={{ width: "30px" }}
+                                                    src={bin}
+                                                    className="pointer"
+                                                />
+                                                <img
+                                                    onClick={(e) => {
+                                                        handleNoteViewing(e, note.id);
+                                                    }}
+                                                    style={{ width: "30px" }}
+                                                    src={write}
+                                                    className="pointer"
+                                                />
+                                            </div>
+                                        </div>
                                     </div>
-                                </div>
-                            </div>
-                        )
-                    }    
-                }
-            )
-            :
-            <div>
-                No result :(
+                                );
+                            }
+                        })
+                    ) : (
+                        <div>No result :(</div>
+                    )}
+                </div>
             </div>
-            }
         </div>
     );
-}
+};
 
 export default NoteList;

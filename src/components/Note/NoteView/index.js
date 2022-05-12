@@ -4,6 +4,10 @@ import firebase from './../../Firebase/firebase';
 import NoteDeleteOverlay from './NoteDeleteOverlay';
 import OverlayMessage from '../../HelperComponents/OverlayMessage';
 import "./noteview.css";
+import pencil from "../../../images/pencil.svg";
+import backArrow from "../../../images/backArrow.svg";
+import greenCheck from "../../../images/greenCheck.svg";
+import redCross from "../../../images/redCross.svg";
 const NoteView = (props) => {
     const [isEditingTitle, setIsEditingTitle] = useState(false);
     const [isEditingBody, setIsEditingBody] = useState(false);
@@ -122,7 +126,7 @@ const NoteView = (props) => {
         user.get().then((doc)=>{
             if(doc.exists){
                 db.collection("accounts").doc(receiverUser).update({
-                    notes: firebase.firestore.FieldValue.arrayUnion(notes[id]) 
+                    notes: firebase.firestore.FieldValue.arrayUnion(notes[id])
                 }).then(()=>{
                     console.log("shared");
                 })
@@ -134,11 +138,11 @@ const NoteView = (props) => {
         })
     }
     let deleteNote = () =>{
-       updateTheNote("delete");
-       setTimeout(() => {
-           history(-1);
-       }, 1000);
-        
+        updateTheNote("delete");
+        setTimeout(() => {
+            history(-1);
+        }, 1000);
+
     }
     let toggleDeleteOverlay = () => {
         setIsDeletingNote(!isDeletingNote);
@@ -167,7 +171,7 @@ const NoteView = (props) => {
     let handleAddLock = () => {
         //have a form pop up asking for the input
         setTrigger3(true);
-    }   
+    }
     let handleRemoveLock = () => {
         //Enter passcode again to remove lock
         setTrigger4(true);
@@ -213,103 +217,217 @@ const NoteView = (props) => {
             let noteForm = document.getElementsByClassName("note-form")[0];
             noteForm.style.display = "none";
         }
-    }, [currentNote]); 
-    return (
-        <div id="note-view">
-            <NoteDeleteOverlay toggleOverlay = {toggleDeleteOverlay} deleteNote = {deleteNote} overlayOn={isDeletingNote}>
-            </NoteDeleteOverlay>
-            {currentNote && <div className="note-form">
-                <div className="options-buttons">
-                    {isEditingBody && <div className="redo-btn-group">
-                        <button>Undo</button>
-                        <button>Redo</button>
-                    </div>}
-                    {props.operation == "create" 
-                    && <div className="create-btn-group">
-                        <button disabled={currentNote.title == "" || currentNote.body == ""} onClick={createNewNote}>Create</button>
-                        <button onClick={() => {history(-1)}}>Cancel</button>
-                    </div>}
-                    {props.operation == "edit" 
-                    && <div className="edit-btn-group">
-                        {!isSharingFormOn && <button onClick={toggleShareForm}>Share</button>}
-                        <button onClick={toggleDeleteOverlay}>Delete</button>
-                        <button onClick={() => {history(-1)} }>Back</button>
-                    </div>}
-                    {isSharingFormOn && 
-                    <form id="sharing-form">
-                        {!receiverExist&&<span className="error receiver-not-exist">The receiver not exist, please try again</span>}
-                        <label>Share to username:</label>
-                        <input type="text" value={receiverUser} onChange={handleReceiverUserNameInput}></input>
-                        <button onClick={checkReceiverExist}>Share this note</button>
-                        <button onClick={()=>{
-                            setIsSharingFormOn(false);
-                        }}>Cancel Sharing</button>
-                    </form>
-                    }
-                    {currentNote.locked ? 
-                    <React.Fragment>
-                    <button onClick={handleRemoveLock}>Remove Lock</button>
-                    </React.Fragment> 
-                    : 
-                    <button onClick={handleAddLock}>Add Lock</button>}
-                </div>
-                <h3 className="editable note-title">
-                    {isEditingTitle?
-                    <form>
-                        <input placeholder='Enter title name' type="text" autoFocus={true} value={currentNote.title} onChange={handleEditTitle}></input>
-                        <button onClick={settleTitleEdit}>Done</button>
-                    </form>:
-                    <div className="content" onClick={toggleEditTitle} title="Edit the title">
-                        {currentNote.title}
-                    </div>
-                    }
-                </h3>
-                <div className="editable note-body">
-                    {isEditingBody?
-                    <form>
-                        <textarea placeholder='Enter note here' autoFocus={true} type="text" value={currentNote.body} onChange={handleEditBody}></textarea>
-                        <button onClick={settleBodyEdit}>Done</button>
-                    </form>:
-                    <div className="content"onClick={toggleEditBody} title="Edit the body" >
-                        {currentNote.body.split("\n").map((p)=>{
-                            return(
-                                <p key={p}>
-                                    {p}
-                                </p>
-                            )
-                        })}
-                    </div>
-                    }
-                </div>
+    }, [currentNote]);
 
-            </div>}
-            <OverlayMessage toggle={triggerMessageOverlay1}  id="overlay-creating-note">Creating new note</OverlayMessage>
+    return (
+        <div id="note-view" className="px-4 py-5">
+            <NoteDeleteOverlay toggleOverlay = {toggleDeleteOverlay} deleteNote={deleteNote} overlayOn={isDeletingNote}
+            ></NoteDeleteOverlay>
+            {currentNote && (
+                <div className="note-form">
+                    <div className="note-view-btn options-buttons d-flex gap-3 font">
+                        {/* {isEditingBody && (
+                            <div className="redo-btn-group d-flex gap-3">
+                                <button>Undo</button>
+                                <button>Redo</button>
+                            </div>
+                        )} */}
+                        {props.operation == "create" && (
+                            <div className="create-btn-group d-flex gap-3">
+                                <button
+                                    disabled={currentNote.title == "" || currentNote.body == ""} onClick={createNewNote}>
+                                    Create
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        history(-1);
+                                    }}
+                                >
+                                    Cancel
+                                </button>
+                            </div>
+                        )}
+                        {props.operation == "edit" && (
+                            <div className="edit-btn-group d-flex gap-3">
+                                {!isSharingFormOn && (
+                                    <button onClick={toggleShareForm}>Share</button>
+                                )}
+                                <button onClick={toggleDeleteOverlay}>Delete</button>
+                                <button
+                                    onClick={() => {
+                                        history(-1);
+                                    }}
+                                >
+                                    Back
+                                </button>
+                            </div>
+                        )}
+
+                        {isSharingFormOn && (
+                            <form id="sharing-form">
+                                {!receiverExist && (
+                                    <span className="error receiver-not-exist">
+                                        The receiver not exist, please try again
+                                    </span>
+                                )}
+                                <label>Share to username:</label>
+                                <input
+                                    type="text"
+                                    value={receiverUser}
+                                    onChange={handleReceiverUserNameInput}
+                                ></input>
+                                <button onClick={checkReceiverExist}>Share this note</button>
+                                <button
+                                    onClick={() => {
+                                        setIsSharingFormOn(false);
+                                    }}
+                                >
+                                    Cancel Sharing
+                                </button>
+                            </form>
+                        )}
+                        {currentNote.locked ? (
+                            <React.Fragment>
+                                <button onClick={handleRemoveLock}>Remove Lock</button>
+                            </React.Fragment>
+                        ) : (
+                            <button onClick={handleAddLock}>Add Lock</button>
+                        )}
+                    </div>
+                    <br />
+                    <div className="note-view-body py-4">
+                        <h3 className="editable note-title">
+                            {isEditingTitle ? (
+                                <form className="d-flex align-items-center font">
+                                    <input
+                                        placeholder="Enter title name"
+                                        type="text"
+                                        autoFocus={true}
+                                        value={currentNote.title}
+                                        onChange={handleEditTitle}
+                                    ></input>
+                                    <div className="note-view-btn">
+                                        <button onClick={settleTitleEdit}>Done</button>
+                                    </div>
+                                </form>
+                            ) : (
+                                <div
+                                    className="content"
+                                    onClick={toggleEditTitle}
+                                    title="Edit the title"
+                                >
+                                    {currentNote.title}
+                                </div>
+                            )}
+                        </h3>
+                        <div className="editable note-body pt-3">
+                            {isEditingBody ? (
+                                <form>
+                                    <textarea
+                                        placeholder="Enter note here"
+                                        autoFocus={true}
+                                        type="text"
+                                        value={currentNote.body}
+                                        onChange={handleEditBody}
+                                        className="w-100 bg-transparent border-0 font"
+                                    ></textarea>
+                                    <div className="note-view-btn">
+                                        <button className="font" onClick={settleBodyEdit}>
+                                            Done
+                                        </button>
+                                    </div>
+                                </form>
+                            ) : (
+                                <div
+                                    className="content"
+                                    onClick={toggleEditBody}
+                                    title="Edit the body"
+                                >
+                                    {currentNote.body.split("\n").map((p) => {
+                                        return <p key={p}>{p}</p>;
+                                    })}
+                                </div>
+                            )}
+                        </div>
+                    </div>
+                </div>
+            )}
+            <OverlayMessage
+                toggle={triggerMessageOverlay1}
+                id="overlay-creating-note"
+            >
+                Creating new note
+            </OverlayMessage>
             <OverlayMessage toggle={triggerMessageOverlay2} id="overlay-lock-note">
-                {wrongPassCode && <p className="wrong-lock-pass error">Wrong passcode, Please try again</p>}
+                {wrongPassCode && (
+                    <p className="wrong-lock-pass error">
+                        Wrong passcode, Please try again
+                    </p>
+                )}
                 <h3>This note is locked, please enter the password</h3>
-                <input type="password" value={notePassInput} onChange={handleNotePass}></input>
+                <input
+                    type="password"
+                    value={notePassInput}
+                    onChange={handleNotePass}
+                ></input>
                 <button onClick={unlockNote}>Unlock the note</button>
-                <button onClick={()=>{
-                    history(-1);
-                }}>Cancel</button>
+                <button
+                    onClick={() => {
+                        history(-1);
+                    }}
+                >
+                    Cancel
+                </button>
             </OverlayMessage>
             <OverlayMessage toggle={trigger3} id="creating-lock">
                 <h3 className="lock-message">Please provide passcode for the lock</h3>
-                <input type="text" value={newNotePass} onChange={handleNewNotePass}></input>
+                <input
+                    type="text"
+                    value={newNotePass}
+                    onChange={handleNewNotePass}
+                ></input>
                 <button onClick={createNewLock}>Confirm code</button>
-                <button onClick={()=>{setTrigger3(false)}}>Cancel</button>
+                <button
+                    onClick={() => {
+                        setTrigger3(false);
+                    }}
+                >
+                    Cancel
+                </button>
             </OverlayMessage>
             <OverlayMessage toggle={trigger4} id="remove-lock">
-                {wrongPassCode && <p className="wrong-lock-pass error">Wrong passcode, Please try again</p>}
+                {wrongPassCode && (
+                    <p className="wrong-lock-pass error">
+                        Wrong passcode, Please try again
+                    </p>
+                )}
                 <div className="remove-lock-header">
                     <h3>Provide the passcode to remove the lock</h3>
-                    <input type="text" value={removePassLock} onChange={handleRemovePassLock}></input>
+                    <input
+                        type="text"
+                        value={removePassLock}
+                        onChange={handleRemovePassLock}
+                    ></input>
                     <button onClick={removeLock}>Confirm code</button>
-                    <button onClick={()=>{setTrigger4(false)}}>Cancel</button>
+                    <button
+                        onClick={() => {
+                            setTrigger4(false);
+                        }}
+                    >
+                        Cancel
+                    </button>
                 </div>
             </OverlayMessage>
+            <div className="d-flex justify-content-end mt-2">
+                <button
+                    onClick={() => history(-1)}
+                    className="bg-transparent border-0 font h2"
+                >
+                    <img style={{ width: "30px" }} src={backArrow} alt="" /> BACK
+                </button>
+            </div>
         </div>
     );
-}
+};
 
 export default NoteView;
