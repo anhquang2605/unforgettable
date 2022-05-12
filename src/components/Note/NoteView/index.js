@@ -89,6 +89,7 @@ const NoteView = (props) => {
             theNote.dateCreated = todayDate.toLocaleDateString();
             theNote.id = String(tempNotes.length);
             tempNotes.push(theNote);
+            console.log(tempNotes);
         } else {
             tempNotes[id] = theNote;
         }
@@ -125,13 +126,24 @@ const NoteView = (props) => {
         let user = db.collection("accounts").doc(receiverUser);
         user.get().then((doc)=>{
             if(doc.exists){
-                db.collection("accounts").doc(receiverUser).update({
-                    notes: firebase.firestore.FieldValue.arrayUnion(notes[id])
+                let daNotes = [];
+                let daNote = null;
+                //get notes from the user
+                db.collection("accounts").doc(receiverUser).get().then((doc)=>{
+                    daNotes = [...doc.data().notes];
                 }).then(()=>{
-                    console.log("shared");
+                     //append the new node with different id 
+                    daNote = {...notes[id]};
+                    daNote.id = daNotes.length;
+                    daNotes.push(daNote);
+                    db.collection("accounts").doc(receiverUser).update({
+                        notes: daNotes
+                    }).then(()=>{
+                        console.log("shared");
+                    })
+                    setReceiverExist(true);
+                    toggleShareForm();
                 })
-                setReceiverExist(true);
-                toggleShareForm();
             } else {
                 setReceiverExist(false);
             }

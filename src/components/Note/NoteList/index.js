@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { useNavigate } from 'react-router-dom';
 import firebase from '../../Firebase/firebase';
 import './notelist.css';
@@ -10,6 +10,7 @@ import write from "../../../images/write.svg";
 const NoteList = (props) => {
     const [shareToUserList, setShareToUser] = useState({});
     const [reciverExistList, setReceiverExistList] = useState({});
+    const [notesCount, setNotesCount] = useState(0);
     const db = firebase.firestore();
     let history = useNavigate();
     let handleNoteViewing = (e,id) => {
@@ -47,14 +48,19 @@ const NoteList = (props) => {
     }
     let shareNote = (id) => {
         let notes = [...props.notes];
+        let daNotes = [];
+        let daNote = null;
         let receiverErrorCodes = {...reciverExistList};
         let user = db.collection("accounts").doc(shareToUserList[id]);
         user.get().then((doc)=>{
             if(doc.exists){
+                daNotes = doc.data().notes;
+                daNote = {...notes[id]};
+                daNote.id = daNotes.length;
+                daNotes.push(daNote);
                 db.collection("accounts").doc(shareToUserList[id]).update({
-                    notes: firebase.firestore.FieldValue.arrayUnion(notes[id])
+                    notes: daNotes
                 }).then(()=>{
-                    console.log("shared");
                     receiverErrorCodes[id] = false;
                     setReceiverExistList(receiverErrorCodes);
                     closeSmOverlay(id,"share");
@@ -64,7 +70,7 @@ const NoteList = (props) => {
                 setReceiverExistList(receiverErrorCodes);
             }
         })
-    }
+    }   
     let deleteNote = (id) => {
         let tempNotes = [...props.notes];
         tempNotes[id].active = false;
@@ -76,6 +82,9 @@ const NoteList = (props) => {
         })
 
     }
+    useEffect(() => {
+        setNotesCount(0);
+    }, [props.notes]);
     return (
         <div id="note-list">
             <div className="container-fluid px-0">
