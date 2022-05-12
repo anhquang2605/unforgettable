@@ -1,6 +1,6 @@
 import './app.css';
 import React, {useEffect, useState} from 'react';
-import {NavLink, renderMatches, Route, Routes, useNavigate} from 'react-router-dom';
+import {NavLink, Route, Routes, useNavigate} from 'react-router-dom';
 import * as ROUTES from "../../constants/Routes"; //This is where you all find your link to the component, used in the Routes and Route component below
 import { NAVIGATION_ITEMS } from '../../constants/NavigationItems';
 import LogIn from '../Authentication/LogIn';
@@ -13,6 +13,7 @@ import Calendar from './../Calendar';
 import Note from './../Note';
 import NoteView from './../Note/NoteView';
 import Splash from './../Splash';
+
 function App() {
     const [user, setUser] = useState(null);
     const [services, setServices] = useState([]);
@@ -40,9 +41,9 @@ function App() {
     }
   return (
     <div className="unforgettable-app">
-        {user}
+       {/* {user} */}
       <NavBar>
-         {user?
+         {user? (
             <React.Fragment>
                 {NAVIGATION_ITEMS.map((item)=>(
                 <NavLink key={item.route} 
@@ -52,7 +53,8 @@ function App() {
                 </NavLink>
                 ))}
                 <a href="#" onClick={handleLogout}>Log out</a>
-            </React.Fragment> :
+            </React.Fragment> 
+         ):(
             <React.Fragment>
                  <NavLink className={(navigationData) => (navigationData.isActive? "active-link":"")} to="/log-in">
                      Log in
@@ -61,7 +63,7 @@ function App() {
                     Sign up
                 </NavLink>
             </React.Fragment>
-         }
+         )}
       </NavBar>
       <Routes>
             <Route path={ROUTES.LOGIN} element={<LogIn setUserForApp={setUser}/>}></Route>
