@@ -4,8 +4,8 @@ import {useState, useEffect} from 'react';
 import {useNavigate} from 'react-router-dom';
 import firebase from '../Firebase/firebase';
 import i1 from "../../images/home/i1.svg";
-import i2 from "../../images/home/i2.svg";
-import i3 from "../../images/home/i3.png";
+import i3 from "../../images/home/i2.svg";
+import i2 from "../../images/home/i3.png";
 
 const Home = (props) => {
   const db = firebase.firestore();
@@ -19,19 +19,20 @@ const Home = (props) => {
             <h1 className="font mt-3 text-center display-4">Note Taking</h1>
           </div>
           <div
-            onClick={() => history("/my-checklist")}
-            className="col-4 pointer"
-          >
-            <img className="w-100" src={i2} alt="" />
-            <h1 className="font mt-3 text-center display-4">Checklist</h1>
-          </div>
-          <div
             onClick={() => history("/my-calendar")}
             className="col-4 pointer"
           >
             <img className="w-100" src={i3} alt="" />
             <h1 className="font mt-3 text-center display-4">Calendar</h1>
           </div>
+          <div
+            onClick={() => history("/my-checklist")}
+            className="col-4 pointer"
+          >
+            <img className="w-100" src={i2} alt="" />
+            <h1 className="font mt-3 text-center display-4">Checklist</h1>
+          </div>
+          
         </div>
       </div>
 

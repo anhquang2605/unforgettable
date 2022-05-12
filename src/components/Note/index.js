@@ -6,6 +6,12 @@ import NoteList from './NoteList';
 import "./note.css";
 import NoteFilter from './NoteFilter';
 import NoteSorter from './NoteSorter';
+import add from "../../images/add.svg";
+import fwd from "../../images/fwd.svg";
+import lock from "../../images/lock.svg";
+import bin from "../../images/bin.png";
+import write from "../../images/write.svg";
+
 const Note = (props) => {
     const [user, setUser] = useState(null);
     const [notes, setNotes] = useState([]);
@@ -26,7 +32,7 @@ const Note = (props) => {
 
     let getUserFromDB = (userID) => {
         let docRef = db.collection("accounts").doc(userID).onSnapshot((doc)=>{
-                setUser(doc.data());
+            setUser(doc.data());
         })
     }
 
@@ -51,24 +57,39 @@ const Note = (props) => {
     }, [user]);
 
     return (
-        <div id="my-note">
-            {props.user}'s Notes 
-            {notes.length != 0?
-            <React.Fragment>
-                <div id="organize-utility">
-                    <NoteFilter notes={notes} setFNotesForNote={setFNotesForNote}></NoteFilter>
-                    <NoteSorter notes={filteredNotes} setFNotesForNote={setFNotesForNote}></NoteSorter>
-                </div>     
-                <NoteList user={props.user} notes = {filteredNotes}></NoteList>
-            </React.Fragment>
-
-            : <div className="empty-note">
-                There is no note currently
+        <div id="my-note" className="px-4 py-5">
+            <div className="d-flex justify-content-between align-items-center">
+                <h3 className="font">
+                    Let’s Take some notes{" "}
+                    <img
+                        id="add-new-note-btn"
+                        onClick={() => {
+                            history("/note-view/create");
+                        }}
+                        style={{ width: "35px" }}
+                        src={add}
+                        alt=""
+                        className="pointer"
+                    />
+                </h3>
+                <div>
+                    <NoteFilter
+                        notes={notes}
+                        setFNotesForNote={setFNotesForNote}
+                    ></NoteFilter>
+                </div>
+                <div className="d-flex align-items-center gap-2 font">
+                    <NoteSorter
+                        notes={filteredNotes}
+                        setFNotesForNote={setFNotesForNote}
+                    ></NoteSorter>
+                </div>
             </div>
-            }
-            <button id="add-new-note-btn" onClick={()=>{history("/note-view/create")}}>+ Add a new note</button>
+            <br />
+            <br />
+            <NoteList user={props.user} notes={filteredNotes}></NoteList>
         </div>
     );
-}
+};
 
 export default Note;
