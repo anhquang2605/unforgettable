@@ -123,10 +123,7 @@ function App() {
           element={<NoteView operation="edit" user={user}></NoteView>}
         ></Route>
         <Route path={ROUTES.SPLASH} element={<Splash></Splash>}></Route>
-        <Route
-          path={ROUTES.CHECKLIST}
-          element={<Checklists user={user} />}
-        ></Route>
+        <Route path={ROUTES.CHECKLIST} element={<Checklists />}></Route>
         {/* <Route path={ROUTES.CALENDAR} element={<Calendar user={user}></Calendar>}></Route> */}
       </Routes>
     </div>

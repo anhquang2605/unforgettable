@@ -1,0 +1,35 @@
+.note-delete-overlay{
+    background-color: rgba(255,255,255,0.9);
+    transition: all 0.3s;
+    height: 90vh;
+    width: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 2000;
+    text-align: center;
+    border: 1px solid gray;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    box-sizing: border-box;
+}
+.note-delete-overlay.gone{
+    height: 0;
+    z-index: -2000;
+    border: 0;
+    overflow: hidden;
+}
+.message-box, .deleting{
+    z-index: 100;
+    font-size: 2em;
+    z-index: 1999;
+}
+.hide-away{
+    opacity: 0;
+    z-index: 1998;
+    height: 0;
+    border: 0;
+    overflow: hidden;
+}

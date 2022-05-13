@@ -1,11 +1,44 @@
 import React, { useState, useEffect } from "react";
 import { Button, Modal, ModalHeader, ModalBody, ModalFooter } from "reactstrap";
 import ChecklistCard from "./ChecklistCard";
+import firebase from "../Firebase/firebase";
+import CheckListModal from "./CheckListModal";
 
-const Checklists = () => {
+const Checklists = (props) => {
+  const [user, setUser] = useState(null);
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   const [checklistArray, setChecklistArray] = useState([]);
+
+  const db = firebase.firestore();
+
+  let setChecklistsFromUser = (data) => {
+    let userChecklists = data?.checklistArray;
+    console.log({ userChecklists });
+    setChecklistArray(userChecklists || []);
+  };
+
+  useEffect(() => {
+    if (props.user != "") {
+      // getUserFromDB(props.user);
+      db.collection("accounts")
+        .doc(props.user)
+        .onSnapshot((doc) => {
+          const data = doc.data();
+          setUser(data);
+          setChecklistsFromUser(data);
+        });
+    }
+  }, []);
+  /*
+  useEffect(() => {
+    if (checklistArray?.length > 0) {
+      debugger;
+      db.collection("accounts").doc(props.user).update({
+        checklistArray,
+      });
+    }
+  }, [checklistArray?.length]);*/
 
   const saveChecklist = (checklist) => {
     let tempArray = checklistArray;
@@ -17,6 +50,7 @@ const Checklists = () => {
     let tempArray = checklistArray;
     tempArray.splice(index, 1);
     setChecklistArray(tempArray);
+    window.location.reload();
   };
 
   console.log({ checklistArray });
@@ -25,7 +59,7 @@ const Checklists = () => {
       <div className="header">
         <h1>Let's get productive.</h1>
         <Button onClick={() => setModal(true)}>Create Checklist</Button>
-        <CreateChecklist
+        <CheckListModal
           toggle={toggle}
           modal={modal}
           save={saveChecklist}
@@ -39,35 +73,19 @@ const Checklists = () => {
         checklistArray.map((obj, index) => (
           <ChecklistCard
             checklist={obj}
+            key={index}
             index={index}
             deleteChecklist={deleteChecklist}
+            checklistArray={checklistArray}
+            setChecklistArray={setChecklistArray}
+            toggle={toggle}
           />
         ))}
     </div>
   );
 };
 
-const CreateChecklist = ({
-  toggle,
-  modal,
-  setChecklistArray,
-  checklistArray,
-}) => {
-  return (
-    <Modal isOpen={modal} toggle={toggle}>
-      <ModalHeader toggle={toggle}>Create Checklist</ModalHeader>
-      <ModalBody>
-        <Checklist
-          setChecklistArray={setChecklistArray}
-          checklistArray={checklistArray}
-        />
-      </ModalBody>
-      <ModalFooter></ModalFooter>
-    </Modal>
-  );
-};
-
-function Task({ task, index, completeTask, removeTask }) {
+export function Task({ task, index, completeTask, removeTask }) {
   return (
     <div
       className="task"
@@ -80,7 +98,7 @@ function Task({ task, index, completeTask, removeTask }) {
   );
 }
 
-function AddTask({ addTask }) {
+export function AddTask({ addTask }) {
   const [value, setValue] = useState("");
 
   useEffect(() => setValue(value), [value]);
@@ -103,98 +121,6 @@ function AddTask({ addTask }) {
       ></input>
       <button type="submit">Submit</button>
     </form>
-  );
-}
-
-function Checklist({ setChecklistArray, checklistArray }) {
-  const [checklistName, setChecklistName] = useState("");
-  const [tasks, setTasks] = useState([]);
-
-  const addTask = (name) => {
-    const newTasks = [...tasks, { name, completed: false }];
-    setTasks(newTasks);
-  };
-
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setChecklistName(value);
-  };
-
-  function completeTask(index) {
-    const newTasks = [...tasks];
-    newTasks[index].completed = true;
-    setTasks(newTasks);
-  }
-
-  const removeTask = (index) => {
-    const newTasks = [...tasks];
-    newTasks.splice(index, 1);
-    setTasks(newTasks);
-  };
-
-  const handleSaveCheckList = () => {
-    const foundCheckList =
-      checklistArray.find(
-        (checkList) =>
-          checkList.checklistName.toLowerCase() === checklistName.toLowerCase()
-      ) || {};
-
-    if (Object.keys(foundCheckList).length === 0) {
-      setChecklistArray([
-        ...checklistArray,
-        {
-          checklistName,
-          tasks,
-        },
-      ]);
-    } else {
-      setChecklistArray(
-        checklistArray.map((checkList) => {
-          if (
-            checkList.checklistName.toLowerCase() ===
-            checklistName.toLowerCase()
-          ) {
-            return {
-              ...checkList,
-              tasks,
-            };
-          } else {
-            return checkList;
-          }
-        })
-      );
-    }
-  };
-
-  return (
-    <div className="checklist">
-      <div className="form-group">
-        <label>Checklist Name</label>
-        <input
-          type="text"
-          className="form-control"
-          name="checklistName"
-          value={checklistName}
-          onChange={handleChange}
-        />
-      </div>{" "}
-      <br></br>
-      <div className="task-list">
-        {tasks.map((task, index) => (
-          <Task
-            task={task}
-            index={index}
-            key={index}
-            completeTask={completeTask}
-            removeTask={removeTask}
-          />
-        ))}
-      </div>
-      <div className="add-task">
-        <AddTask addTask={addTask} />
-      </div>
-      <Button onClick={handleSaveCheckList}>Save Checklist</Button>
-    </div>
   );
 }
 

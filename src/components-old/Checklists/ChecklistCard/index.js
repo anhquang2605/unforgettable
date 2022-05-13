@@ -2,14 +2,7 @@ import React, { useState } from "react";
 import { Card, CardBody, CardTitle, CardText, Button } from "reactstrap";
 import EditChecklist from "../EditChecklist";
 
-const ChecklistCard = ({
-  checklist,
-  index,
-  deleteChecklist,
-  checklistArray,
-  setChecklistArray,
-}) => {
-  console.log({ checklistArrayCard: checklistArray });
+const ChecklistCard = ({ checklist, index, deleteChecklist }) => {
   const [modal, setModal] = useState(false);
   const [selectedChecklistName, setSelectedChecklistName] = useState("");
   const [selectedTasks, setSelectedTasks] = useState([]);
@@ -32,9 +25,8 @@ const ChecklistCard = ({
         <CardBody>
           <CardTitle tag="h5">{checklist.checklistName}</CardTitle>
           <CardText>
-            {checklist.tasks.map((task, index) => (
+            {checklist.tasks.map((task) => (
               <li
-                key={index}
                 style={{ textDecoration: task.completed ? "line-through" : "" }}
               >
                 {task.name}
@@ -53,8 +45,6 @@ const ChecklistCard = ({
         checklist={checklist}
         selectedChecklistName={selectedChecklistName}
         selectedTasks={selectedTasks}
-        checklistArray={checklistArray}
-        setChecklistArray={setChecklistArray}
       />
     </div>
   );
