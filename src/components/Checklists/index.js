@@ -13,6 +13,12 @@ const Checklists = () => {
     setChecklistArray(tempArray);
   };
 
+  const deleteChecklist = (index) => {
+    let tempArray = checklistArray;
+    tempArray.splice(index, 1);
+    setChecklistArray(tempArray);
+  };
+
   console.log({ checklistArray });
   return (
     <div>
@@ -29,14 +35,14 @@ const Checklists = () => {
       </div>
       <div className="checklist-view"></div>
 
-      {checklistArray.map((key, obj) => (
-        <li key={key}>
-          <h3>{obj.checklistName}</h3>
-          {obj.tasks.map((task) => (
-            <li>{task.name}</li>
-          ))}
-        </li>
-      ))}
+      {checklistArray &&
+        checklistArray.map((obj, index) => (
+          <ChecklistCard
+            checklist={obj}
+            index={index}
+            deleteChecklist={deleteChecklist}
+          />
+        ))}
     </div>
   );
 };
