@@ -1,6 +1,5 @@
 import "./app.css";
 import React, { useEffect, useState } from "react";
-import {NavLink, Route, Routes, useNavigate} from 'react-router-dom';
 import {
   NavLink,
   renderMatches,
