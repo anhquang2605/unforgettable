@@ -25,7 +25,7 @@ const NoteSorter = (props) => {
         props.setFNotesForNote(notes.reverse());
     }
     useEffect(() => {
-       if(props.notes && sortCriteria != ""){//Start sorting
+        if(props.notes && sortCriteria != ""){//Start sorting
             let newNotes = [...props.notes];
 
             newNotes.sort((a,b)=>{
@@ -45,14 +45,18 @@ const NoteSorter = (props) => {
                 }
             });
             props.setFNotesForNote(newNotes)
-       }
+        }
     }, [sortCriteria]);
     return (
-        <div className="note-sorter">
+        <div className="note-sorter d-flex gap-2">
             <label>Sort By:</label>
-            {<button onClick={handleOrder}>{asc?"Ascending":"Descending"}</button>}
-            <select  value={sortCriteriaField} onChange={handleSortCriteria}>
-                {NOTE_SORT_OPTIONS.map((item,i) => (
+            {
+                <button className="btn btn-dark py-1" onClick={handleOrder}>
+                    {asc ? "Ascending" : "Descending"}
+                </button>
+            }
+            <select className="px-2" value={sortCriteriaField} onChange={handleSortCriteria}>
+                {NOTE_SORT_OPTIONS.map((item, i) => (
                     <option key={item} value={item}>{item.split("-").map(word => {
                         let firstLeter = word[0].toUpperCase();
                         let restLetters = word.substring(1);

@@ -1,5 +1,6 @@
 import "./app.css";
 import React, { useEffect, useState } from "react";
+import {NavLink, Route, Routes, useNavigate} from 'react-router-dom';
 import {
   NavLink,
   renderMatches,
@@ -20,6 +21,7 @@ import Note from "./../Note";
 import NoteView from "./../Note/NoteView";
 import Splash from "./../Splash";
 import Checklists from "../Checklists";
+
 function App() {
   const [user, setUser] = useState(null);
   const [services, setServices] = useState([]);
@@ -89,6 +91,7 @@ function App() {
             </NavLink>
           </React.Fragment>
         )}
+
       </NavBar>
 
       <Routes>

@@ -1,1 +1,85 @@
-#log-in{}
+#log-in {
+    background: url("../../../images/login.svg");
+    background-position: top right;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: calc(100vh - 87px);
+    width: 100vw;
+    padding: 0rem 2rem;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+  }
+  
+  #log-in input {
+    height: 50px;
+    background: #ffffff;
+    border: none;
+    width: 480px;
+    padding: 0rem 1rem;
+  }
+  
+  #log-in input::-webkit-input-placeholder {
+    color: #000;
+    font-style: italic;
+    font-weight: 600;
+  }
+  
+  #log-in input::-moz-placeholder {
+    color: #000;
+    font-style: italic;
+    font-weight: 600;
+  }
+  
+  #log-in input:-ms-input-placeholder {
+    color: #000;
+    font-style: italic;
+    font-weight: 600;
+  }
+  
+  #log-in input::-ms-input-placeholder {
+    color: #000;
+    font-style: italic;
+    font-weight: 600;
+  }
+  
+  #log-in input::placeholder {
+    color: #000;
+    font-style: italic;
+    font-weight: 600;
+  }
+  
+  .error {
+    font-size: 12px;
+    float: right;
+  }
+  
+  .forget_pss {
+    font-weight: 500;
+    font-size: 14px;
+    font-style: italic;
+    float: right;
+  }
+  
+  .form-button1 {
+    background: rgba(23, 98, 167, 0.9);
+    height: 40px;
+    width: 317px;
+    color: #ffffff;
+    font-size: 22px;
+    font-weight: 400;
+    font-style: italic;
+    border: none;
+  }
+  
+  .form-button2 {
+    background: #b6e1b9;
+    height: 40px;
+    width: 317px;
+    margin-top: 0.6rem;
+    border: none;
+  }
+  
