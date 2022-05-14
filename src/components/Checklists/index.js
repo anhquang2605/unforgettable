@@ -9,6 +9,7 @@ const Checklists = (props) => {
   const [modal, setModal] = useState(false);
   const toggle = () => setModal(!modal);
   const [checklistArray, setChecklistArray] = useState([]);
+  const [refresh, setRefresh] = useState(false);
 
   const db = firebase.firestore();
 
@@ -30,15 +31,14 @@ const Checklists = (props) => {
         });
     }
   }, []);
-  /*
+
+  console.log("rendered");
+
   useEffect(() => {
-    if (checklistArray?.length > 0) {
-      debugger;
-      db.collection("accounts").doc(props.user).update({
-        checklistArray,
-      });
-    }
-  }, [checklistArray?.length]);*/
+    db.collection("accounts").doc(props.user).update({
+      checklistArray,
+    });
+  }, [refresh]);
 
   const saveChecklist = (checklist) => {
     let tempArray = checklistArray;
@@ -47,10 +47,11 @@ const Checklists = (props) => {
   };
 
   const deleteChecklist = (index) => {
-    let tempArray = checklistArray;
-    tempArray.splice(index, 1);
-    setChecklistArray(tempArray);
-    window.location.reload();
+    // let tempArray = checklistArray;
+    //tempArray.splice(index, 1);
+    setChecklistArray(checklistArray.filter((list, id) => id !== index));
+    setRefresh((refresh) => !refresh);
+    //window.location.reload();
   };
 
   console.log({ checklistArray });
@@ -65,6 +66,7 @@ const Checklists = (props) => {
           save={saveChecklist}
           setChecklistArray={setChecklistArray}
           checklistArray={checklistArray}
+          setRefresh={setRefresh}
         />
       </div>
       <div className="checklist-view"></div>
@@ -79,6 +81,7 @@ const Checklists = (props) => {
             checklistArray={checklistArray}
             setChecklistArray={setChecklistArray}
             toggle={toggle}
+            setRefresh={setRefresh}
           />
         ))}
     </div>

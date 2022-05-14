@@ -6,6 +6,7 @@ const CheckListModal = ({
   modal,
   setChecklistArray,
   checklistArray,
+  setRefresh,
 }) => {
   return (
     <Modal isOpen={modal} toggle={toggle}>
@@ -15,6 +16,7 @@ const CheckListModal = ({
           setChecklistArray={setChecklistArray}
           checklistArray={checklistArray}
           toggle={toggle}
+          setRefresh={setRefresh}
         />
       </ModalBody>
       <ModalFooter></ModalFooter>

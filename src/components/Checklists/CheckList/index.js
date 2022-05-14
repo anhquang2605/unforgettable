@@ -8,6 +8,7 @@ function Checklist({
   selectedChecklistName,
   selectedTasks,
   toggle,
+  setRefresh,
 }) {
   const [checklistName, setChecklistName] = useState(selectedChecklistName);
   const [tasks, setTasks] = useState([]);
@@ -51,7 +52,6 @@ function Checklist({
   };
 
   const handleEditCheckList = () => {
-    debugger;
     setChecklistArray(
       checklistArray?.map((item) => {
         if (item.checklistName === selectedChecklistName) {
@@ -65,6 +65,7 @@ function Checklist({
         }
       })
     );
+    setRefresh((refresh) => !refresh);
     toggle();
   };
 
@@ -99,7 +100,7 @@ function Checklist({
       });
     }
     setChecklistArray(checkListToSave);
-
+    setRefresh((refresh) => !refresh);
     toggle();
   };
 

@@ -8,13 +8,19 @@ const ChecklistCard = ({
   deleteChecklist,
   checklistArray,
   setChecklistArray,
+  setRefresh,
 }) => {
   console.log({ checklistArrayCard: checklistArray });
   const [modal, setModal] = useState(false);
   const [selectedChecklistName, setSelectedChecklistName] = useState("");
   const [selectedTasks, setSelectedTasks] = useState([]);
   const handleDelete = () => {
-    deleteChecklist(index);
+    const shouldDelete = window.confirm(
+      "Are you sure you want to delete this checklist?"
+    );
+    if (shouldDelete) {
+      deleteChecklist(index);
+    }
   };
 
   const toggle = () => {
@@ -55,6 +61,7 @@ const ChecklistCard = ({
         selectedTasks={selectedTasks}
         checklistArray={checklistArray}
         setChecklistArray={setChecklistArray}
+        setRefresh={setRefresh}
       />
     </div>
   );

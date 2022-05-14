@@ -9,6 +9,7 @@ const EditChecklist = ({
   checklistArray,
   selectedChecklistName,
   selectedTasks,
+  setRefresh,
 }) => {
   return (
     <Modal isOpen={modal} toggle={toggle}>
@@ -20,6 +21,7 @@ const EditChecklist = ({
           selectedChecklistName={selectedChecklistName}
           selectedTasks={selectedTasks}
           toggle={toggle}
+          setRefresh={setRefresh}
         />
       </ModalBody>
       <ModalFooter></ModalFooter>
