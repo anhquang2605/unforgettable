@@ -1,0 +1,37 @@
+{
+  "files": {
+    "main.css": "/unforgettable/static/css/main.548b97a2.css",
+    "main.js": "/unforgettable/static/js/main.424834c2.js",
+    "static/js/787.3ac0b889.chunk.js": "/unforgettable/static/js/787.3ac0b889.chunk.js",
+    "static/media/login.svg": "/unforgettable/static/media/login.672a06d377136c8d625e.svg",
+    "static/media/main-banner.png": "/unforgettable/static/media/main-banner.e64ffdf086451bfe3ca2.png",
+    "static/media/calendar_splash.png": "/unforgettable/static/media/calendar_splash.242e8bb3a1371e50a16a.png",
+    "static/media/i1.svg": "/unforgettable/static/media/i1.42cefaca4691d27bceb650e040bcb943.svg",
+    "static/media/share.png": "/unforgettable/static/media/share.41bcc31f86c7be37d5f1.png",
+    "static/media/i3.png": "/unforgettable/static/media/i3.235a613d95160eafd864.png",
+    "static/media/checklist_splash.png": "/unforgettable/static/media/checklist_splash.f736fe3c8bd899983cb1.png",
+    "static/media/note_splash.png": "/unforgettable/static/media/note_splash.f82f552246ce3982c7d1.png",
+    "static/media/note.png": "/unforgettable/static/media/note.77f2584789ab989d2aa1.png",
+    "static/media/checklist.png": "/unforgettable/static/media/checklist.2322360a315598adb53d.png",
+    "static/media/calendar.png": "/unforgettable/static/media/calendar.4a5f2a73a19671e64e01.png",
+    "static/media/pencil.svg": "/unforgettable/static/media/pencil.9ad9db6b6c77da3674eb7f3069c5ab21.svg",
+    "static/media/i2.svg": "/unforgettable/static/media/i2.c7e5377f4170f48e5f3822dac6844733.svg",
+    "static/media/footerBtn.svg": "/unforgettable/static/media/footerBtn.04814265eede98acf683a2f8776cdbcd.svg",
+    "static/media/logo.svg": "/unforgettable/static/media/logo.6e591af8e0970bafd573fa3ad661ab24.svg",
+    "static/media/write.svg": "/unforgettable/static/media/write.8ebd5eae63d79b8f8b6c406ac2a22d64.svg",
+    "static/media/add.svg": "/unforgettable/static/media/add.0f64c7df21f3466672f58ec02b87ed2a.svg",
+    "static/media/lock.svg": "/unforgettable/static/media/lock.e955510c865932e9838bff987c061ba5.svg",
+    "index.html": "/unforgettable/index.html",
+    "static/media/fwd.svg": "/unforgettable/static/media/fwd.02f7d8fa0df4d518df3fbdacb95fa548.svg",
+    "static/media/backArrow.svg": "/unforgettable/static/media/backArrow.9e21420307de8b51d96a65bc86d8b3cd.svg",
+    "static/media/redCross.svg": "/unforgettable/static/media/redCross.c4ee12fee15f6e8a2cc847d7900a83ed.svg",
+    "static/media/greenCheck.svg": "/unforgettable/static/media/greenCheck.e4843c20466bddc311996ba1ba55bc44.svg",
+    "main.548b97a2.css.map": "/unforgettable/static/css/main.548b97a2.css.map",
+    "main.424834c2.js.map": "/unforgettable/static/js/main.424834c2.js.map",
+    "787.3ac0b889.chunk.js.map": "/unforgettable/static/js/787.3ac0b889.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.548b97a2.css",
+    "static/js/main.424834c2.js"
+  ]
+}
