@@ -51,7 +51,6 @@ function App() {
   };
   return (
     <div className="unforgettable-app">
-      {user}
       <NavBar>
         {user ? (
           <React.Fragment>
@@ -66,7 +65,9 @@ function App() {
                 {item.title}
               </NavLink>
             ))}
+
             <a href="#" onClick={handleLogout}>
+              
               Log out
             </a>
           </React.Fragment>
