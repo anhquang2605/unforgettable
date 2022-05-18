@@ -123,21 +123,26 @@ function Checklist({
         />
       </div>{" "}
       <br></br>
-      <div className="task-list">
-        {tasks.map((task, index) => (
-          <Task
-            task={task}
-            index={index}
-            key={index}
-            completeTask={completeTask}
-            removeTask={removeTask}
-          />
-        ))}
-      </div>
+      <ul className="task-list">
+        {(tasks.length &&
+          tasks.map((task, index) => (
+            <Task
+              task={task}
+              index={index}
+              key={index}
+              completeTask={completeTask}
+              removeTask={removeTask}
+            />
+          ))) || <div className="">No task</div>}
+      </ul>
+      <br></br>
       <div className="add-task">
         <AddTask addTask={addTask} />
       </div>
-      <Button onClick={checkListHandler}>
+      <Button
+        className="mt-4 w-100 btn-dark fw-bold"
+        onClick={checkListHandler}
+      >
         {isEdit ? "Update" : "Save"} Checklist
       </Button>
     </div>

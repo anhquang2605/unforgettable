@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import { Card, CardBody, CardTitle, CardText, Button } from "reactstrap";
+import { CardTitle, CardText, Button } from "reactstrap";
 import EditChecklist from "../EditChecklist";
+import write from "../../../images/write.svg";
+import bin from "../../../images/bin.png";
 
 const ChecklistCard = ({
   checklist,
@@ -33,26 +35,41 @@ const ChecklistCard = ({
     setSelectedTasks(list.tasks || []);
   };
   return (
-    <div>
-      <Card>
-        <CardBody>
-          <CardTitle tag="h5">{checklist.checklistName}</CardTitle>
-          <CardText>
+    <div className="col-4 pb-4">
+      <div className="checklist-card pt-4 pb-3 px-4">
+        <div>
+          <CardTitle
+            tag="h2"
+            className="fw-bold border-bottom border-3 border-dark pb-1"
+          >
+            {checklist.checklistName}
+          </CardTitle>
+          <CardText className="py-4">
             {checklist.tasks.map((task, index) => (
-              <li
+              <div
                 key={index}
                 style={{ textDecoration: task.completed ? "line-through" : "" }}
-              >
+                className="d-flex align-items-center gap-2 h4 py-1" >
                 {task.name}
-              </li>
+              </div>
             ))}
           </CardText>
-          <Button onClick={() => handleEditCheckList(checklist)}>
-            Edit Checklist
-          </Button>
-          <Button onClick={handleDelete}>Delete Checklist</Button>
-        </CardBody>
-      </Card>
+          <div className="d-flex justify-content-between gap-3">
+            <Button
+              className="btn bg-transparent border-0 p-0"
+              onClick={handleDelete}
+            >
+              <img style={{ maxHeight: "38px" }} src={bin} alt="" />
+            </Button>
+            <Button
+              className="btn bg-transparent border-0 p-0"
+              onClick={() => handleEditCheckList(checklist)}
+            >
+              <img style={{ maxHeight: "38px" }} src={write} alt="" />
+            </Button>
+          </div>
+        </div>
+      </div>
       <EditChecklist
         modal={modal}
         toggle={toggle}
