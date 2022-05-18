@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/unforgettable/static/css/main.548b97a2.css",
-    "main.js": "/unforgettable/static/js/main.424834c2.js",
+    "main.css": "/unforgettable/static/css/main.413e2356.css",
+    "main.js": "/unforgettable/static/js/main.b2521c3b.js",
     "static/js/787.3ac0b889.chunk.js": "/unforgettable/static/js/787.3ac0b889.chunk.js",
     "static/media/login.svg": "/unforgettable/static/media/login.672a06d377136c8d625e.svg",
     "static/media/main-banner.png": "/unforgettable/static/media/main-banner.e64ffdf086451bfe3ca2.png",
@@ -26,12 +26,12 @@
     "static/media/backArrow.svg": "/unforgettable/static/media/backArrow.9e21420307de8b51d96a65bc86d8b3cd.svg",
     "static/media/redCross.svg": "/unforgettable/static/media/redCross.c4ee12fee15f6e8a2cc847d7900a83ed.svg",
     "static/media/greenCheck.svg": "/unforgettable/static/media/greenCheck.e4843c20466bddc311996ba1ba55bc44.svg",
-    "main.548b97a2.css.map": "/unforgettable/static/css/main.548b97a2.css.map",
-    "main.424834c2.js.map": "/unforgettable/static/js/main.424834c2.js.map",
+    "main.413e2356.css.map": "/unforgettable/static/css/main.413e2356.css.map",
+    "main.b2521c3b.js.map": "/unforgettable/static/js/main.b2521c3b.js.map",
     "787.3ac0b889.chunk.js.map": "/unforgettable/static/js/787.3ac0b889.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.548b97a2.css",
-    "static/js/main.424834c2.js"
+    "static/css/main.413e2356.css",
+    "static/js/main.b2521c3b.js"
   ]
 }
