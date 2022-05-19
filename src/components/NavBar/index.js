@@ -6,7 +6,7 @@ const NavBar = (props) => {
   return (
     <div id="nav-bar">
       <div id="company-logo">
-        <img src={logo} alt="" /> Unforgetable
+        <img src={logo} alt="" /> Unforgettable
       </div>
       <div className="navigation_part">{props.children}</div>
     </div>
