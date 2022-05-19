@@ -23,7 +23,6 @@ const Checklists = (props) => {
 
   useEffect(() => {
     if (props.user != "") {
-      // getUserFromDB(props.user);
       db.collection("accounts")
         .doc(props.user)
         .onSnapshot((doc) => {
@@ -49,19 +48,17 @@ const Checklists = (props) => {
   };
 
   const deleteChecklist = (index) => {
-    // let tempArray = checklistArray;
-    //tempArray.splice(index, 1);
     setChecklistArray(checklistArray.filter((list, id) => id !== index));
     setRefresh((refresh) => !refresh);
-    //window.location.reload();
   };
 
   console.log({ checklistArray });
   return (
-    <div id="checklist" >
+    <div id="checklist">
       <div className="px-4 py-5">
         <div className="d-flex justify-content-between align-items-center">
-          <h1 className="font">Let's make some checklist {" "}
+          <h1 className="font">
+            Let's make some checklists{" "}
             <img
               id=" add-new-checklist-btn"
               onClick={() => setModal(true)}
@@ -71,7 +68,7 @@ const Checklists = (props) => {
               className="pointer"
             />
           </h1>
-          {/* <Button className="btn-success" onClick={() => setModal(true)}>Create Checklist</Button> */}
+          {}
           <CheckListModal
             toggle={toggle}
             modal={modal}

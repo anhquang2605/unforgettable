@@ -13,8 +13,6 @@ function Checklist({
   const [checklistName, setChecklistName] = useState(selectedChecklistName);
   const [tasks, setTasks] = useState([]);
 
-  //console.log({ selectedTasks });
-
   useEffect(() => {
     if (selectedChecklistName) {
       setChecklistName(selectedChecklistName);
